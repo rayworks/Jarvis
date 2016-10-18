@@ -4,6 +4,16 @@
 
 
 {% block content %}
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        {% if not session.logged_in %}
+        <a href="{{ url_for('login') }}">log in</a>
+        {% else %}
+        <a href="{{ url_for('logout') }}">log out</a>
+        {% endif %}
+    </div>
+</nav>
+
 <div class="container">
     {% for message in get_flashed_messages() %}
     <div class="alert alert-warning">

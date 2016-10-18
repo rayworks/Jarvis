@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Todo list{% endblock %}
+
+{% block page_content %}
+
+{% if session.logged_in %}
+<form action="{{ url_for('add_item') }}" method="post" class="add-entry">
+    <dl>
+        <dt>Text:
+        <dd><textarea name="title" rows="5" cols="40"></textarea>
+        <dd><input type="submit" class="btn btn-success" value="Add">
+    </dl>
+</form>
+{% endif %}
+
+
+<div class="list-group">
+    {% for item in entries %}
+    <p>
+        <class container>
+            <li class="list-group-item"> {{item.title}}</li>
+
+            <form action="{{url_for('del_item', id=item.id)}}" method="post" class="remove-entry">
+                <input type="submit" class="btn btn-danger btn-xs" value="delete">
+            </form>
+        </class>
+    </p>
+    {% endfor %}
+
+</div>
+
+
+{% endblock %}
