@@ -8,7 +8,7 @@
 {% if session.logged_in %}
 <form action="{{ url_for('add_item') }}" method="post" class="add-entry">
     <dl>
-        <dt>Text:
+        <dt>I'm going to :
         <dd><textarea name="title" rows="5" cols="40"></textarea>
         <dd><input type="submit" class="btn btn-success" value="Add">
     </dl>
@@ -17,6 +17,10 @@
 
 
 <div class="list-group">
+    <tr>
+        <th>What to do ?</th>
+    </tr>
+
     {% for item in entries %}
     <p>
         <class container>

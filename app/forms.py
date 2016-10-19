@@ -1,17 +1,6 @@
-from flask import Flask, request, jsonify
-from flask import make_response
-from flask import abort
-from flask import render_template
-from flask import flash
-from flask.ext.script import Manager
-from flask.ext.bootstrap import Bootstrap
-
 from flask.ext.wtf import Form
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from wtforms.validators import Required, Length, Email, Regexp, EqualTo
-from wtforms import ValidationError
-
-import json
+from wtforms.validators import Required, Length, Regexp
 
 
 class LoginForm(Form):
