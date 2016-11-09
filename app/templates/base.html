@@ -5,6 +5,11 @@
 {% block head %}
 {{ super() }}
 
+{% block scripts %}
+{{ super() }}
+{{ moment.include_moment() }}
+{% endblock %}
+
 <link rel="icon" href="{{ url_for('static', filename='fav.ico') }}" type="image/x-icon">
 {% endblock %}
 

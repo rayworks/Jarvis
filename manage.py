@@ -8,11 +8,15 @@ from flask import render_template
 from flask import request, session, g, redirect, url_for
 from flask.ext.migrate import Migrate, MigrateCommand
 from flask.ext.script import Manager, Shell
+from flask import make_response, jsonify
 
 from app import create_app, db
 from app.forms import LoginForm
 
 from app.model import Todo
+from app import moment
+
+from datetime import datetime
 
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 
@@ -54,6 +58,7 @@ def login():
             return redirect(url_for('todos'))
     return render_template('login.html', form=form)
 
+
 @app.route('/add', methods=['POST'])
 def add_item():
     if not session['logged_in']:
@@ -84,7 +89,7 @@ def todos():
         return redirect(url_for('login'))
 
     items = Todo.query.all()
-    return render_template('todo_list.html', entries=items)
+    return render_template('todo_list.html', entries=items, current_time=datetime.utcnow())
 
 
 @app.route('/logout')
@@ -92,6 +97,22 @@ def logout():
     session.pop('logged_in', None)
     flash('You were logged out')
     return redirect(url_for('login'))
+
+
+@app.errorhandler(404)
+def not_found(error):
+    return make_response(jsonify({'error': 'Not found'}), 404)
+
+
+@app.route('/todo-list', methods=['GET'])
+def get_all_todo():
+    items = Todo.query.all()
+
+    json_array = []
+    for i in items:
+        json_array.append({"item" : i.title})
+
+    return jsonify({"items": json_array})
 
 
 if __name__ == '__main__':
