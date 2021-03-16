@@ -1,22 +1,18 @@
 #!/usr/bin/env python
 import os
-from sqlite3 import dbapi2 as sqlite3
+from datetime import datetime
 
 from flask import abort
 from flask import flash
-from flask import render_template
-from flask import request, session, g, redirect, url_for
-from flask.ext.migrate import Migrate, MigrateCommand
-from flask.ext.script import Manager, Shell
 from flask import make_response, jsonify
+from flask import render_template
+from flask import request, session, redirect, url_for
+from flask_migrate import Migrate, MigrateCommand
+from flask_script import Manager, Shell
 
 from app import create_app, db
 from app.forms import LoginForm
-
 from app.model import Todo
-from app import moment
-
-from datetime import datetime
 
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 
