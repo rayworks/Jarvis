@@ -19,7 +19,7 @@
         {% if not session.logged_in %}
         <a href="{{ url_for('login.index') }}">log in</a>
         {% else %}
-        <a href="{{ url_for('logout') }}">log out</a>
+        <a href="{{ url_for('login.logout') }}">log out</a>
         {% endif %}
     </div>
 </nav>
