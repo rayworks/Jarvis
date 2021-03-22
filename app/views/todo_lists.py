@@ -26,7 +26,7 @@ def add_item():
     db.session.commit()
 
     flash('new entry added successfully')
-    return redirect(url_for('todos'))
+    return redirect(url_for('todo_list.index'))
 
 
 @todo_list.route('/del/<int:id>', methods=['POST'])

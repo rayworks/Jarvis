@@ -39,6 +39,9 @@ def create_app(config_name):
     # from .auth import auth as auth_blueprint
     # app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
+    from .views.main import main_bp
+    app.register_blueprint(main_bp)
+
     from .views.login import login
     app.register_blueprint(login, url_prefix='/login')
 

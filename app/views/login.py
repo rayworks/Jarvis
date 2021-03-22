@@ -15,7 +15,7 @@ def index():
         else:
             flash('login successfully')
             session['logged_in'] = True
-            return redirect(url_for('todos'))
+            return redirect(url_for('todo_list.index'))
     return render_template('login.html', form=form)
 
 
