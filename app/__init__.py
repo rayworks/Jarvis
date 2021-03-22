@@ -18,7 +18,7 @@ pagedown = PageDown()
 
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
-login_manager.login_view = './templates/login'
+login_manager.login_view = 'login.index'
 
 
 def create_app(config_name):
@@ -38,5 +38,11 @@ def create_app(config_name):
     #
     # from .auth import auth as auth_blueprint
     # app.register_blueprint(auth_blueprint, url_prefix='/auth')
+
+    from .views.login import login
+    app.register_blueprint(login, url_prefix='/login')
+
+    from .views.todo_lists import todo_list
+    app.register_blueprint(todo_list, url_prefix='/todo_list')
 
     return app
