@@ -8,7 +8,7 @@
 <p>The local date and time is {{ moment(current_time).format('LLL') }}.</p>
 
 {% if session.logged_in %}
-<form action="{{ url_for('add_item') }}" method="post" class="add-entry">
+<form action="{{ url_for('todo_list.add_item') }}" method="post" class="add-entry">
     <dl>
         <dt>I'm going to :
         <dd><textarea name="title" rows="5" cols="40"></textarea>
@@ -28,7 +28,7 @@
         <class container>
             <li class="list-group-item"> {{item.title}}</li>
 
-            <form action="{{url_for('del_item', id=item.id)}}" method="post" class="remove-entry">
+            <form action="{{url_for('todo_list.del_item', id=item.id)}}" method="post" class="remove-entry">
                 <input type="submit" class="btn btn-danger btn-xs" value="delete">
             </form>
         </class>
