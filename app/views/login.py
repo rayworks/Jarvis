@@ -7,19 +7,16 @@ login = Blueprint('login', __name__)
 
 @login.route('/', methods=['GET', 'POST'])
 def index():
-    if request.method == 'GET':
-        form = LoginForm()
-        if form.validate_on_submit():
+    form = LoginForm()
+    if form.validate_on_submit():
 
-            if form.username.data != 'user' or form.password.data != 'pass':
-                flash('Invalid username or password, please try again.')
-            else:
-                flash('login successfully')
-                session['logged_in'] = True
-                return redirect(url_for('todos'))
-        return render_template('login.html', form=form)
-    else:
-        pass
+        if form.username.data != 'user' or form.password.data != 'pass':
+            flash('Invalid username or password, please try again.')
+        else:
+            flash('login successfully')
+            session['logged_in'] = True
+            return redirect(url_for('todos'))
+    return render_template('login.html', form=form)
 
 
 @login.route('/logout', methods=['GET'])
