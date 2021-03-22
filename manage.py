@@ -70,7 +70,7 @@ def add_item():
 
 @app.route('/del/<int:id>', methods=['POST'])
 def del_item(id):
-    print "delete item ", id
+    print("delete item %d" % id)
 
     td = Todo.query.filter_by(id=id).first()
     db.session.delete(td)
