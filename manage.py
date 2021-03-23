@@ -7,7 +7,7 @@ from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager, Shell
 
 from app import create_app, db
-from app.model import Todo
+from app.model import Todo, User
 
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 
@@ -19,7 +19,7 @@ print(app_dir)
 
 
 def make_shell_context():
-    return dict(app=app, db=db, Todo=Todo)
+    return dict(app=app, db=db, Todo=Todo, User=User)
 
 
 manager.add_command("shell", Shell(make_context=make_shell_context))
