@@ -1,6 +1,7 @@
 from datetime import datetime
 
-from flask import Blueprint, abort, flash, redirect, request, render_template, session, url_for
+from flask import Blueprint, flash, redirect, request, render_template, url_for
+from flask_login import login_required
 
 from app.model import Todo, db
 
@@ -8,19 +9,15 @@ todo_list = Blueprint('todo_list', __name__)
 
 
 @todo_list.route('/', methods=['GET', 'POST'])
+@login_required
 def index():
-    if not session.get('logged_in'):
-        return redirect(url_for('login.index'))
-
     items = Todo.query.all()
     return render_template('todo_list.html', entries=items, current_time=datetime.utcnow())
 
 
 @todo_list.route('/add', methods=['POST'])
+@login_required
 def add_item():
-    if not session['logged_in']:
-        abort(401)
-
     td = Todo(request.form['title'])
     db.session.add(td)
     db.session.commit()
@@ -30,6 +27,7 @@ def add_item():
 
 
 @todo_list.route('/del/<int:id>', methods=['POST'])
+@login_required
 def del_item(id):
     print("delete item %d" % id)
 
