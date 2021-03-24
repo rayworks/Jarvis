@@ -27,6 +27,7 @@ def add_item():
 
 
 @todo_list.route('/del/<int:id>', methods=['POST'])
+@login_required
 def del_item(id):
     print("delete item %d" % id)
 
