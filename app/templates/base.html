@@ -16,7 +16,7 @@
 {% block content %}
 <nav class="navbar navbar-default">
     <div class="container-fluid">
-        {% if not session.logged_in %}
+        {% if not current_user.is_authenticated %}
         <a href="{{ url_for('login.index') }}">log in</a>
         {% else %}
         <a href="{{ url_for('login.logout') }}">log out</a>

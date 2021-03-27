@@ -7,7 +7,7 @@
 
 <p>The local date and time is {{ moment(current_time).format('LLL') }}.</p>
 
-{% if session.logged_in %}
+{% if current_user.is_authenticated %}
 <form action="{{ url_for('todo_list.add_item') }}" method="post" class="add-entry">
     <dl>
         <dt>I'm going to :
