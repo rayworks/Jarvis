@@ -44,16 +44,5 @@ def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
 
 
-@app.route('/todo-list', methods=['GET'])
-def get_all_todo():
-    items = Todo.query.all()
-
-    json_array = []
-    for i in items:
-        json_array.append({"item": i.title})
-
-    return jsonify({"items": json_array})
-
-
 if __name__ == '__main__':
     manager.run()
