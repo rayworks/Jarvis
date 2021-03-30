@@ -48,4 +48,7 @@ def create_app(config_name):
     from .views.todo_lists import todo_list
     app.register_blueprint(todo_list, url_prefix='/todo_list')
 
+    from .views.account import register
+    app.register_blueprint(register, url_prefix='/register')
+
     return app
