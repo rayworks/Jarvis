@@ -38,6 +38,9 @@ def create_app(config_name):
     #
     # from .auth import auth as auth_blueprint
     # app.register_blueprint(auth_blueprint, url_prefix='/auth')
+    
+    from .api_1_0 import api as api_1_0_blueprint
+    app.register_blueprint(api_1_0_blueprint, url_prefix='/api/v1.0')
 
     from .views.main import main_bp
     app.register_blueprint(main_bp)
@@ -48,7 +51,7 @@ def create_app(config_name):
     from .views.todo_lists import todo_list
     app.register_blueprint(todo_list, url_prefix='/todo_list')
 
-    from .api_1_0 import api as api_1_0_blueprint
-    app.register_blueprint(api_1_0_blueprint, url_prefix='/api/v1.0')
+    from .views.account import register
+    app.register_blueprint(register, url_prefix='/register')
 
     return app
