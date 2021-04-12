@@ -1,0 +1,38 @@
+#login-header {
+    text-align: center;
+    margin: 100px 0 0 30px;
+}
+
+#account-login {
+    margin-top: 10px;
+    line-height: 1;
+}
+
+#account-login .el-form-item {
+    margin-bottom: 5px;
+}
+
+#account-login .el-form-item__content {
+    display: inline-flex;
+    width: 25%;
+}
+
+#account-login .el-form-item__error {
+    margin-left: 20px;
+    width: max-content;
+}
+
+#account-login .sign-in {
+    width: 95%;
+    margin-left: 20px;
+    background: #e0e1e2 none;
+}
+
+#account-register {
+    text-align: center;
+}
+
+#register-container {
+    display: inline-flex;
+    width: 25%;
+}

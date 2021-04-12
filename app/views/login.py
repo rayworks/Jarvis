@@ -1,7 +1,9 @@
-from flask import Blueprint, flash, redirect, render_template, request, session, url_for
-from flask_login import login_user, logout_user, LoginManager, login_required
+from datetime import timedelta
 
-from app import login_manager
+from flask import Blueprint, flash, jsonify, redirect, render_template, request, session, url_for
+from flask_login import login_user, logout_user, login_required
+
+from app import get_app, login_manager
 from app.forms import LoginForm
 from app.model import User
 
@@ -10,14 +12,30 @@ login = Blueprint('login', __name__)
 
 @login.route('/', methods=['GET', 'POST'])
 def index():
-    form = LoginForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
-        if user is not None and user.verify_password(pwd=form.password.data):
-            login_user(user, form.remember_me.data)
-            return redirect(url_for('todo_list.index'))
-        flash('Invalid username or password, please try again.')
-    return render_template('login.html', form=form)
+    if request.method == 'GET':
+        return render_template('login.html', login_url=url_for('login.index'), register_url=url_for('register.index'))
+    else:
+        return login_validate()
+
+
+def login_validate():
+    username = request.json.get('username', None)
+    password = request.json.get('password', None)
+    remember = request.json.get('remember', 'pppp')
+    form = LoginForm(username=username, password=password, remember=remember)
+    valid = form.validate()
+    print(form.errors)
+    if valid:
+        user = User.query.filter_by(username=username).first()
+        if user and user.verify_password(pwd=password):
+            login_user(user, remember)
+            session.permanent = True
+            app = get_app()
+            app.permanent_session_lifetime = timedelta(minutes=app.config['SESSION_LIFETIME'])
+            return jsonify({'next_url': url_for('todo_list.index')})
+        else:
+            flash('Invalid username or password, please try again.')
+    return jsonify({'next_url': url_for('login.index')})
 
 
 @login_manager.user_loader

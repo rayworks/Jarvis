@@ -6,6 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 from flask_login import LoginManager
 from flask_pagedown import PageDown
+from flask_wtf.csrf import CSRFProtect
 
 
 from config import config
@@ -19,6 +20,11 @@ pagedown = PageDown()
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
 login_manager.login_view = 'login.index'
+csrf = CSRFProtect()
+
+
+class Cache:
+    pass
 
 
 def create_app(config_name):
@@ -32,13 +38,14 @@ def create_app(config_name):
     db.init_app(app)
     login_manager.init_app(app)
     pagedown.init_app(app)
+    csrf.init_app(app)
 
     # from .main import main as main_blueprint
     # app.register_blueprint(main_blueprint)
     #
     # from .auth import auth as auth_blueprint
     # app.register_blueprint(auth_blueprint, url_prefix='/auth')
-    
+
     from .api_1_0 import api as api_1_0_blueprint
     app.register_blueprint(api_1_0_blueprint, url_prefix='/api/v1.0')
 
@@ -54,4 +61,9 @@ def create_app(config_name):
     from .views.account import register
     app.register_blueprint(register, url_prefix='/register')
 
+    Cache.app = app
     return app
+
+
+def get_app():
+    return Cache.app

@@ -10,8 +10,8 @@ class LoginForm(Form):
                                           'Usernames must have only letters, '
                                           'numbers, dots or underscores')])
     password = PasswordField('Password', validators=[Required()])
-    remember_me = BooleanField('Keep me logged in')
-    submit = SubmitField('Log In')
+    remember = BooleanField('Keep me logged in')
+    # submit = SubmitField('Log In')
 
 
 class RegisterForm(Form):

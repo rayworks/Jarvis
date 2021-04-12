@@ -1,14 +1,29 @@
 {% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
 
 {% block title %}Flasky - Register{% endblock %}
 
 {% block page_content %}
-<div class="page-header">
-    <h1>Register</h1>
+<h2 id="register-header" class="ui center aligned header login">Create your account</h2>
+<div id="message-container" style="text-align: center;">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success" style="text-align: center; display: inline-block; margin-bottom: 2px">
+                    <strong>{{ message }}</strong>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
 </div>
-<div class="col-md-4">
-    {{ wtf.quick_form(form) }}
-    <br>
+<div id="register">
+    <!-- <register-form login_url="{{ login_url }}" register_url="{{ register_url }}">
+    </register-form> -->
+    <register-form login_url="{{ login_url }}" register_url="{{ register_url }}">
+    </register-form>
 </div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+    <script type="text/javascript" src="/static/js/register.js"></script>
 {% endblock %}
