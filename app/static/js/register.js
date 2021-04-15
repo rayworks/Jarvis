@@ -17,7 +17,7 @@ Vue.component(
             </el-form-item>
             <el-form-item prop="confirmPassword">
                 <label for="confirmPassword" style="padding-right: 5px; margin-bottom: 0px">
-                    <i class="el-icon-lock"></i>
+                    <i class="el-icon-check"></i>
                 </label>
                 <el-input v-model="registerForm.confirmPassword" placeholder="confirm password"></el-input>
             </el-form-item>
@@ -28,11 +28,14 @@ Vue.component(
                 <el-input v-model="registerForm.email" placeholder="email"></el-input>
             </el-form-item>
             <el-form-item>
-                <el-button class="sign-in" @click="onSubmit('registerForm')">Sign in</el-button>
+                <el-button class="create-account" @click="onSubmit('registerForm')" style="color: #fff">Create account</el-button>
             </el-form-item>
         </el-form>`,
         props: {
             login_url: {
+                type: String
+            },
+            register_url: {
                 type: String
             }
         },
@@ -49,7 +52,7 @@ Vue.component(
             var checkPassword = (rule, value, callback) => {
                 if (value === '') {
                   callback(new Error('Please input password again.'));
-                } else if (value !== this.ruleForm.pass) {
+                } else if (value !== this.registerForm.password) {
                   callback(new Error('Password is not same as above!'));
                 } else {
                   callback();
@@ -88,7 +91,7 @@ Vue.component(
             onSubmit(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        let api = this.$props.login_url;
+                        let api = this.$props.register_url;
                         var datas = JSON.stringify({
                             username: this.registerForm.username,
                             password: this.registerForm.password,

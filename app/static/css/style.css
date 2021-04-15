@@ -36,3 +36,28 @@
     display: inline-flex;
     width: 25%;
 }
+
+#register {
+    margin-top: 10px;
+    line-height: 1;
+}
+
+#register .el-form-item {
+    margin-bottom: 5px;
+}
+
+#register .el-form-item__content {
+    display: inline-flex;
+    width: 25%;
+}
+
+#register .el-form-item__error {
+    margin-left: 20px;
+    width: max-content;
+}
+
+#register .create-account {
+    width: 95%;
+    margin-left: 20px;
+    background: #3076df none;
+}

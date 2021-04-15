@@ -21,8 +21,8 @@ def index():
 def login_validate():
     username = request.json.get('username', None)
     password = request.json.get('password', None)
-    remember = request.json.get('remember', 'pppp')
-    form = LoginForm(username=username, password=password, remember=remember)
+    remember = request.json.get('remember', False)
+    form = LoginForm()
     valid = form.validate()
     print(form.errors)
     if valid:
