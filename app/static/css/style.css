@@ -59,5 +59,9 @@
 #register .create-account {
     width: 95%;
     margin-left: 20px;
+    background: #58a6ff none;
+}
+
+#register .create-account:hover {
     background: #3076df none;
 }

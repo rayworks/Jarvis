@@ -60,7 +60,6 @@ Vue.component(
             };
 
             return {
-                // registerUrl: this.$props.register_url,
                 registerForm: {
                     username: '',
                     password: '',
