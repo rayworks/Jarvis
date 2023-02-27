@@ -17,6 +17,8 @@ app_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), 'app'))
 
 print(app_dir)
 
+with app.app_context():
+    db.create_all()
 
 def make_shell_context():
     return dict(app=app, db=db, Todo=Todo, User=User)

@@ -26,6 +26,8 @@ def create_app(config_name):
     app.config.from_object(config[config_name])
     config[config_name].init_app(app)
 
+    print(">>> config db : ", config[config_name].SQLALCHEMY_DATABASE_URI)
+
     bootstrap.init_app(app)
     mail.init_app(app)
     moment.init_app(app)
